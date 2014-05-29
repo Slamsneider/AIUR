@@ -3,9 +3,9 @@ local versionNumber = 1.1
 local args = {...}
 
 if #args == 1 and args[1] == "remove" then
-	if fs.exists("/AIUR") then
-		fs.delete("/AIUR")
-		if fs.exists("/.aiur") then fs.delete("/.aiur") end
+	if fs.exists("/Aiur") then
+		fs.delete("/Aiur")
+		if fs.exists("/.Aiur") then fs.delete("/.Aiur") end
 	end
 	return
 end
@@ -69,7 +69,7 @@ end
 if #args < 1 or args[1] ~= "setup" then
 	for _, file in ipairs(fileList) do
 		print("Fetching file: "..file)
-		local remoteHandle = http.get("https://cdn.rawgit.com/Slamsneider/AIUR/master/"..file)
+		local remoteHandle = http.get("https://cdn.rawgit.com/Slamsneider/Aiur/master/"..file)
 		if remoteHandle then
 			fileHandle = io.open("/.Aiur/"..file, "w")
 			if fileHandle then
@@ -87,7 +87,7 @@ if #args < 1 or args[1] ~= "setup" then
 end
 
 resetScreen()
---if exists("/Aiur") then fs.delete("/Aiur")
+if exists("/Aiur") then fs.delete("/Aiur")
 fs.move("/.Aiur/aiur","/Aiur")
 
 print("Run AIUR on startup? (y/N)")
