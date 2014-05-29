@@ -118,7 +118,7 @@ if #input > 0 then
 					handle:write([[shell.run("/Aiur")]].."\n")
 					handle:close()
 				end
-			end if
+			end
 		end
 	end
 end
