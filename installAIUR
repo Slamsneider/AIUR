@@ -111,6 +111,8 @@ if #input > 0 then
 	end
 end
 
+fs.delete(shell.getRunningProgram())
+
 print("Reboot now? (Y/n)")
 term.write("> ")
 input = read()
@@ -127,4 +129,3 @@ term.clear()
 term.setCursorPos(1,1)
 print("AIUR installed - Type 'Aiur' to run")
 sleep(2)
-fs.delete(shell.getRunningProgram())
