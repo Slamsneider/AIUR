@@ -93,7 +93,7 @@ end
 
 resetScreen()
 --if exists("/Aiur") then fs.delete("/Aiur") end
-fs.move("/.AiurSYS/Aiur","/Aiur")
+--fs.move("/.AiurSYS/Aiur","/Aiur")
 
 print("Run AIUR on startup? (y/N)")
 term.write("> ")
