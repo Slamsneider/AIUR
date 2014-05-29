@@ -34,8 +34,8 @@ end
 
 resetScreen()
 
-if not fs.exists("/.Aiur") or not fs.isDir("/.Aiur") then
-	fs.makeDir("/.Aiur")
+if not fs.exists("/.AiurSYS") or not fs.isDir("/.AiurSYS") then
+	fs.makeDir("/.AiurSYS")
 end
 
 if #args < 1 or (args[1] ~= "noupdate" and args[1] ~= "setup") then
@@ -71,12 +71,12 @@ if #args < 1 or args[1] ~= "setup" then
 		print("Fetching file: "..file)
 		local remoteHandle = http.get("https://cdn.rawgit.com/Slamsneider/Aiur/master/"..file)
 		if remoteHandle then
-			fileHandle = io.open("/.Aiur/"..file, "w")
+			fileHandle = io.open("/.AiurSYS/"..file, "w")
 			if fileHandle then
 				fileHandle:write(remoteHandle.readAll())
 				fileHandle:close()
 			else
-				error("Could not open file /.Aiur/"..file)
+				error("Could not open file /.AiurSYS/"..file)
 			end
 		else
 			error("Could not retrieve remote file: "..file)
@@ -88,7 +88,7 @@ end
 
 resetScreen()
 if exists("/Aiur") then fs.delete("/Aiur")
-fs.move("/.Aiur/aiur","/Aiur")
+fs.move("/.AiurSYS/aiur","/Aiur")
 
 print("Run AIUR on startup? (y/N)")
 term.write("> ")
