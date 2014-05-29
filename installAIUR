@@ -1,4 +1,6 @@
-local versionNumber = 1.2
+local versionNumber = 1.3
+
+print("versionNumber: "..versionNumber)
 local sRawgit = "" --"cdn." (cdn. is cached)
 
 local args = {...}
@@ -6,8 +8,9 @@ local args = {...}
 if #args == 1 and args[1] == "remove" then
 	if fs.exists("/Aiur") then
 		fs.delete("/Aiur")
-		if fs.exists("/.Aiur") then fs.delete("/.Aiur") end
+		
 	end
+	if fs.exists("/.AiurSYS") then fs.delete("/.AiurSYS") end
 	return
 end
 
@@ -57,6 +60,7 @@ if #args < 1 or (args[1] ~= "noupdate" and args[1] ~= "setup") then
 	if fileHandle then
 		local newVersionNumber = tonumber(string.match(fileHandle:read("*l"), "local versionNumber = (.*)"))
 		fileHandle:close()
+		print("newVersionNumber: "..newVersionNumber)
 		if newVersionNumber > versionNumber then
 			print("Install finished - restarting: "..shell.getRunningProgram())
 			sleep(2)
@@ -89,7 +93,7 @@ end
 
 resetScreen()
 if exists("/Aiur") then fs.delete("/Aiur")
-fs.move("/.AiurSYS/aiur","/Aiur")
+fs.move("/.AiurSYS/Aiur","/Aiur")
 
 print("Run AIUR on startup? (y/N)")
 term.write("> ")
