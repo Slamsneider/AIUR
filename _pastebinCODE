@@ -1,27 +1,24 @@
-local versionNumber = 1.05
-
+local versionNumber = 0.0
+ 
 local file = "installAIUR"
 print("Fetching file: "..file)
 local remoteHandle = http.get("https://cdn.rawgit.com/Slamsneider/AIUR/master/"..file)
 if remoteHandle then
-	fileHandle = io.open("/"..file, "w")
-	if fileHandle then
-		fileHandle:write(remoteHandle.readAll())
-		fileHandle:close()
-		if file~=shell.getRunningProgram() then
-			fs.delete(shell.getRunningProgram())
-		end
-		print("END PASTEBIN VERSION: "..shell.getRunningProgram())
-		print("Restarting")
-		sleep(2)
-		shell.run("/"..file)
-		return
-	else
-		error("Could not open file: "..file)
-	end
+        fileHandle = io.open("/"..file, "w")
+        if fileHandle then
+                fileHandle:write(remoteHandle.readAll())
+                fileHandle:close()
+                if file~=shell.getRunningProgram() then
+                        fs.delete(shell.getRunningProgram())
+                end
+                print("END PASTEBIN VERSION: "..shell.getRunningProgram())
+                print("RestartingNOT")
+                sleep(2)
+                --shell.run("/"..file)
+                return
+        else
+                error("Could not open file: "..file)
+        end
 else
-	error("Could not retrieve remote file: "..file)
+        error("Could not retrieve remote file: "..file)
 end
-
-
---shell.run("/"..file)
