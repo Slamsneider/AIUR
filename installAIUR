@@ -1,10 +1,10 @@
-local versionNumber = 1.0
+local versionNumber = 1.1
 
 local args = {...}
 
 if #args == 1 and args[1] == "remove" then
 	if fs.exists("/AIUR") then
-		fs.delete("/AIUR")
+		finstas.delete("/AIUR")
 		if fs.exists("/.aiur") then fs.delete("/.aiur") end
 	end
 	return
