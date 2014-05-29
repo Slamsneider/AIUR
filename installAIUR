@@ -18,6 +18,10 @@ local fileList = {
 	"VERSION",
 }
 
+function tron()
+
+end
+
 function resetScreen()
 	term.clear()
 	term.setCursorPos(1,1)
@@ -36,7 +40,7 @@ end
 
 if #args < 1 or (args[1] ~= "noupdate" and args[1] ~= "setup") then
 	print("Updating Installer")
-	local remoteHandle = http.get("http://pastebin.com/GWkbq6cn")
+	local remoteHandle = http.get("http://pastebin.com/raw.php?i=GWkbq6cn")
 	if remoteHandle then
 		fileHandle = io.open(shell.getRunningProgram(), "w")
 		if fileHandle then
@@ -53,6 +57,8 @@ if #args < 1 or (args[1] ~= "noupdate" and args[1] ~= "setup") then
 		local newVersionNumber = tonumber(string.match(fileHandle:read("*l"), "local versionNumber = (.*)"))
 		fileHandle:close()
 		if newVersionNumber > versionNumber then
+			print("Install finished - restarting: "..shell.getRunningProgram())
+			sleep(2)
 			shell.run(shell.getRunningProgram(), "noupdate")
 			return
 		end
@@ -110,3 +116,5 @@ end
 
 term.clear()
 term.setCursorPos(1,1)
+print("Install finish")
+sleep(2)
