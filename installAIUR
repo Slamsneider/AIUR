@@ -41,7 +41,7 @@ resetScreen()
 if not fs.exists("/.AiurSYS") or not fs.isDir("/.AiurSYS") then
 	fs.makeDir("/.AiurSYS")
 end
-
+--[[
 if #args < 1 or (args[1] ~= "noupdate" and args[1] ~= "setup") then
 	print("Updating Installer")
 	local remoteHandle = http.get("http://pastebin.com/raw.php?i=GWkbq6cn")
@@ -70,6 +70,7 @@ if #args < 1 or (args[1] ~= "noupdate" and args[1] ~= "setup") then
 	end
 	resetScreen()
 end
+]]--
 
 if #args < 1 or args[1] ~= "setup" then
 	for _, file in ipairs(fileList) do
