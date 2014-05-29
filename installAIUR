@@ -93,7 +93,6 @@ if #args < 1 or args[1] ~= "setup" then
 	print("Finished fetching!")
 	sleep(1)
 end
-
 resetScreen()
 if fs.exists("/Aiur") then fs.delete("/Aiur") end
 fs.move("/.AiurSYS/Aiur","/Aiur")
@@ -126,5 +125,6 @@ end
 
 term.clear()
 term.setCursorPos(1,1)
-print("Install finish")
+print("AIUR installed - Type 'Aiur' to run")
 sleep(2)
+fs.delete(shell.getRunningProgram())
