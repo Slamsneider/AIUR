@@ -97,7 +97,7 @@ resetScreen()
 if fs.exists("/Aiur") then fs.delete("/Aiur") end
 fs.move("/.AiurSYS/Aiur","/Aiur")
 
-print("Run AIUR on startup? (y/N)")
+print("Run AIUR on startup (append to top)? (y/N)")
 term.write("> ")
 local input = read()
 if #input > 0 then
