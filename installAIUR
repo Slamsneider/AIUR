@@ -113,11 +113,11 @@ if #input > 0 then
 			if #input > 0 and input=="d" then
 				fs.delete("/startup")
 			end
-			local handle = io.open("/startup", "a")
-			if handle then
-				handle:write([[shell.run("/Aiur")]].."\n")
-				handle:close()
-			end
+		end
+		local handle = io.open("/startup", "a")
+		if handle then
+			handle:write([[shell.run("/Aiur")]].."\n")
+			handle:close()
 		end
 	end
 end
