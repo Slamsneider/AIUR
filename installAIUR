@@ -11,7 +11,7 @@ if #args == 1 and args[1] == "remove" then
 end
 
 local fileList = {
-	"AIUR",
+	"/Aiur",
 	"LICENSE",
 	"uninstall",
 	"update",
