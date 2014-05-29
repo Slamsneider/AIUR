@@ -4,7 +4,7 @@ local args = {...}
 
 if #args == 1 and args[1] == "remove" then
 	if fs.exists("/AIUR") then
-		finstas.delete("/AIUR")
+		fs.delete("/AIUR")
 		if fs.exists("/.aiur") then fs.delete("/.aiur") end
 	end
 	return
@@ -87,6 +87,8 @@ if #args < 1 or args[1] ~= "setup" then
 end
 
 resetScreen()
+if exists("/Aiur") then fs.delete("/Aiur")
+fs.move("/.aiur/aiur","/Aiur")
 
 print("Run AIUR on startup? (y/N)")
 term.write("> ")
