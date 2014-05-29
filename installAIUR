@@ -97,16 +97,28 @@ resetScreen()
 if fs.exists("/Aiur") then fs.delete("/Aiur") end
 fs.move("/.AiurSYS/Aiur","/Aiur")
 
-print("Run AIUR on startup (append to top)? (y/N)")
+print("Run AIUR on startup (y/N)")
+
 term.write("> ")
 local input = read()
 if #input > 0 then
 	input = string.lower(string.sub(input, 1, 1))
 	if input == "y" then
-		local handle = io.open("/startup", "a")
-		if handle then
-			handle:write([[shell.run("/Aiur")]].."\n")
-			handle:close()
+		if fs.exists("/startup") then
+			print("Delete existing 'startup' or Append to existing")
+			print("(A)ppend to top (D)elete (A/d)")
+			term.write("> ")
+			local input = read()
+			input = string.lower(string.sub(input, 1, 1))
+			if #input > 0 and input=="d" then
+				fs.delete("/startup")
+			else
+				local handle = io.open("/startup", "a")
+				if handle then
+					handle:write([[shell.run("/Aiur")]].."\n")
+					handle:close()
+				end
+			end if
 		end
 	end
 end
