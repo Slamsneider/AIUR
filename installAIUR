@@ -30,8 +30,8 @@ end
 
 resetScreen()
 
-if not fs.exists("/AIUR") or not fs.isDir("/AIUR") then
-	fs.makeDir("/AIUR")
+if not fs.exists("/.aiur") or not fs.isDir("/.aiur") then
+	fs.makeDir("/.aiur")
 end
 
 if #args < 1 or (args[1] ~= "noupdate" and args[1] ~= "setup") then
@@ -63,14 +63,14 @@ end
 if #args < 1 or args[1] ~= "setup" then
 	for _, file in ipairs(fileList) do
 		print("Fetching file: "..file)
-		local remoteHandle = http.get("https://raw.github.com/Slamsneider/AIUR/master/"..file)
+		local remoteHandle = http.get("https://cdn.rawgit.com/Slamsneider/AIUR/master/"..file)
 		if remoteHandle then
-			fileHandle = io.open("/AIUR/"..file, "w")
+			fileHandle = io.open("/.aiur/"..file, "w")
 			if fileHandle then
 				fileHandle:write(remoteHandle.readAll())
 				fileHandle:close()
 			else
-				error("Could not open file /AIUR/"..file)
+				error("Could not open file /.aiur/"..file)
 			end
 		else
 			error("Could not retrieve remote file: "..file)
@@ -79,20 +79,6 @@ if #args < 1 or args[1] ~= "setup" then
 	print("Finished fetching!")
 	sleep(1)
 end
---[[
---write sane default window sizes
-if not fs.exists("/AIUR/.lyqwin") then
-	local handle = io.open("/AIUR/.lyqwin", "w")
-	if handle then
-		handle:write([[1,1,9,4,false,rom/programs/reboot]].."\n")
-		handle:write([[1,1,9,4,false,rom/programs/shutdown]].."\n")
-		handle:write([[1,1,19,9,true,rom/programs/color/paint]].."\n")
-		handle:close()
-		--if installer is being run from packman
-		if packman then packman.addFile("/AIUR/.lyqwin") end
-	end
-end
-]]--
 
 resetScreen()
 
