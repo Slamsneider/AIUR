@@ -11,7 +11,7 @@ if #args == 1 and args[1] == "remove" then
 end
 
 local fileList = {
-	"/Aiur",
+	"Aiur",
 	"LICENSE",
 	"uninstall",
 	"update",
@@ -34,8 +34,8 @@ end
 
 resetScreen()
 
-if not fs.exists("/.aiur") or not fs.isDir("/.aiur") then
-	fs.makeDir("/.aiur")
+if not fs.exists("/.aiurSYS") or not fs.isDir("/.aiurSYS") then
+	fs.makeDir("/.aiurSYS")
 end
 
 if #args < 1 or (args[1] ~= "noupdate" and args[1] ~= "setup") then
@@ -71,12 +71,12 @@ if #args < 1 or args[1] ~= "setup" then
 		print("Fetching file: "..file)
 		local remoteHandle = http.get("https://cdn.rawgit.com/Slamsneider/AIUR/master/"..file)
 		if remoteHandle then
-			fileHandle = io.open("/.aiur/"..file, "w")
+			fileHandle = io.open("/.aiurSYS/"..file, "w")
 			if fileHandle then
 				fileHandle:write(remoteHandle.readAll())
 				fileHandle:close()
 			else
-				error("Could not open file /.aiur/"..file)
+				error("Could not open file /.aiurSYS/"..file)
 			end
 		else
 			error("Could not retrieve remote file: "..file)
@@ -88,7 +88,7 @@ end
 
 resetScreen()
 --if exists("/Aiur") then fs.delete("/Aiur")
-fs.move("/.aiur/aiur","/Aiur")
+fs.move("/.aiurSYS/aiur","/Aiur")
 
 print("Run AIUR on startup? (y/N)")
 term.write("> ")
@@ -98,7 +98,7 @@ if #input > 0 then
 	if input == "y" then
 		local handle = io.open("/startup", "a")
 		if handle then
-			handle:write([[shell.run("/aiur")]].."\n")
+			handle:write([[shell.run("/Aiur")]].."\n")
 			handle:close()
 		end
 	end
