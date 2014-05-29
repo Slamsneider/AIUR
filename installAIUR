@@ -92,7 +92,7 @@ if #args < 1 or args[1] ~= "setup" then
 end
 
 resetScreen()
-if exists("/Aiur") then fs.delete("/Aiur")
+if exists("/Aiur") then fs.delete("/Aiur") end
 fs.move("/.AiurSYS/Aiur","/Aiur")
 
 print("Run AIUR on startup? (y/N)")
