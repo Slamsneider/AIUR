@@ -1,4 +1,4 @@
-local versionNumber = 1.01
+local versionNumber = 1.000001
 
 print("versionNumber: "..versionNumber)
 sleep(2)
