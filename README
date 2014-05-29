@@ -1,0 +1,20 @@
+AutoInstallUpdate -- A test project for ComputerCraft.
+
+This test project is used to develop a system for install and
+autoupdate of programs in ComputerCraft.
+
+The program uses pastebin for the install file, and github for
+other programfiles.
+
+STATUS: ALPHA (Nothing working)
+
+Test the program here: http://pastebin.com/GWkbq6cn
+
+Planned future features:
+  * Use pastebin only if desired
+  * Option to install in any subfolder, instead of root.
+  * Auto configuration for any program so users have an easy time to
+    use in their own programs they want auto functionallity in.
+
+/sEi'2014
+

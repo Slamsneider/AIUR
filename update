@@ -1,0 +1,7 @@
+--[[
+wip...
+
+Checking for version and updates all if new version
+
+]]--
+print("Hello from:"..shell.getRunningProgram())

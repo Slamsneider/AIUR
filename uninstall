@@ -1,0 +1,5 @@
+--[[
+uninstalls the program (remember to test confirm ,)
+
+]]--
+print("Hello from:"..shell.getRunningProgram())

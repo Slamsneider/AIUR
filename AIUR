@@ -1,0 +1,24 @@
+--[[
+
+wip...
+
+This is the actual program!
+
+Have check in start:
+----
+if
+
+file /.autoinstallupdate/autoupdate exists
+or
+tArg[1] = "update"
+
+then run /.autoinstallupdate/update
+----
+if
+
+tArgs[1]="uninstall"
+
+then run /.autoinstallupdate/uninstall
+
+]]--
+print("Hello from:"..shell.getRunningProgram())

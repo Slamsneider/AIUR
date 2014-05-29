@@ -1,0 +1,17 @@
+File structure after install on a CC computer:
+(install is deleted!)
+
+[prog] = autoinstallupdate = AIU
+
+/[prog] - file (The program have check if autoupdate then run .../update)
+/.[prog] - folder (hidden)
+/.[prog]/autoupdate - file (auto generated if autoupdate is true)
+/.[prog]/LICENCE
+/.[prog]/update
+/.[prog]/VERSION
+/.[prog]/uninstall
+
+
+
+
+

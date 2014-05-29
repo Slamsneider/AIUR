@@ -1,0 +1,126 @@
+local versionNumber = 1.0
+
+local args = {...}
+
+if #args == 1 and args[1] == "remove" then
+	if fs.exists("/AIUR") then
+		fs.delete("/AIUR")
+		if fs.exists("/.aiur") then fs.delete("/.aiur") end
+	end
+	return
+end
+
+local fileList = {
+	"AIUR",
+	"LICENSE",
+	"uninstall",
+	"update",
+	"VERSION",
+}
+
+function resetScreen()
+	term.clear()
+	term.setCursorPos(1,1)
+	xlim, ylim = term.getSize()
+	if xlim >= 20 then
+		term.write("=AIUR Installer"..string.rep("=", xlim - 18))
+		term.setCursorPos(1,2)
+	end
+end
+
+resetScreen()
+
+if not fs.exists("/AIUR") or not fs.isDir("/AIUR") then
+	fs.makeDir("/AIUR")
+end
+
+if #args < 1 or (args[1] ~= "noupdate" and args[1] ~= "setup") then
+	print("Updating Installer")
+	local remoteHandle = http.get("http://pastebin.com/GWkbq6cn")
+	if remoteHandle then
+		fileHandle = io.open(shell.getRunningProgram(), "w")
+		if fileHandle then
+			fileHandle:write(remoteHandle.readAll())
+			fileHandle:close()
+		else
+			error("Could not open file "..shell.getRunningProgram())
+		end
+	else
+		error("Could not retrieve remote file.")
+	end
+	local fileHandle = io.open(shell.getRunningProgram(), "r")
+	if fileHandle then
+		local newVersionNumber = tonumber(string.match(fileHandle:read("*l"), "local versionNumber = (.*)"))
+		fileHandle:close()
+		if newVersionNumber > versionNumber then
+			shell.run(shell.getRunningProgram(), "noupdate")
+			return
+		end
+	end
+	resetScreen()
+end
+
+if #args < 1 or args[1] ~= "setup" then
+	for _, file in ipairs(fileList) do
+		print("Fetching file: "..file)
+		local remoteHandle = http.get("https://raw.github.com/Slamsneider/AIUR/master/"..file)
+		if remoteHandle then
+			fileHandle = io.open("/AIUR/"..file, "w")
+			if fileHandle then
+				fileHandle:write(remoteHandle.readAll())
+				fileHandle:close()
+			else
+				error("Could not open file /AIUR/"..file)
+			end
+		else
+			error("Could not retrieve remote file: "..file)
+		end
+	end
+	print("Finished fetching!")
+	sleep(1)
+end
+--[[
+--write sane default window sizes
+if not fs.exists("/AIUR/.lyqwin") then
+	local handle = io.open("/AIUR/.lyqwin", "w")
+	if handle then
+		handle:write([[1,1,9,4,false,rom/programs/reboot]].."\n")
+		handle:write([[1,1,9,4,false,rom/programs/shutdown]].."\n")
+		handle:write([[1,1,19,9,true,rom/programs/color/paint]].."\n")
+		handle:close()
+		--if installer is being run from packman
+		if packman then packman.addFile("/AIUR/.lyqwin") end
+	end
+end
+]]--
+
+resetScreen()
+
+print("Run AIUR on startup? (y/N)")
+term.write("> ")
+local input = read()
+if #input > 0 then
+	input = string.lower(string.sub(input, 1, 1))
+	if input == "y" then
+		local handle = io.open("/startup", "a")
+		if handle then
+			handle:write([[shell.run("/AIUR")]].."\n")
+			handle:close()
+		end
+	end
+end
+
+print("Reboot now? (Y/n)")
+term.write("> ")
+input = read()
+if #input > 0 then
+	input = string.lower(string.sub(input, 1, 1))
+	if input == "y" then
+		os.reboot()
+	end
+else
+	os.reboot()
+end
+
+term.clear()
+term.setCursorPos(1,1)
