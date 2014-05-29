@@ -96,7 +96,7 @@ if #input > 0 then
 	if input == "y" then
 		local handle = io.open("/startup", "a")
 		if handle then
-			handle:write([[shell.run("/AIUR")]].."\n")
+			handle:write([[shell.run("/aiur")]].."\n")
 			handle:close()
 		end
 	end
