@@ -1,3 +1,5 @@
+local versionNumber = 0.1
+
 --[[
 
 wip..
@@ -21,4 +23,4 @@ tArgs[1]="uninstall"
 then run /.autoinstallupdate/uninstall
 
 ]]--
-print("Hello from:"..shell.getRunningProgram())
+print("Hello from:"..shell.getRunningProgram().." version: "..versionNumber)
